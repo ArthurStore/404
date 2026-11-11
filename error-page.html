@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en" data-motion="on">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-doc-title">404 Not Found | Arthur Official Website</title>
+  <link rel="icon" type="image/svg+xml" href="https://arthurg.my.id/favicon-robot.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #040912;
+      --bg-mid: #081226;
+      --surface: #0a1633;
+      --surface-elevated: #102048;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-strong: #2563eb;
+      --accent-glow: rgba(56, 189, 248, 0.26);
+      --border: rgba(56, 189, 248, 0.22);
+      --warn: #fbbf24;
+      --danger: #f87171;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100dvh;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      background-image:
+        radial-gradient(circle at 18% 20%, rgba(37, 99, 235, 0.22) 0%, transparent 42%),
+        radial-gradient(circle at 82% 78%, rgba(56, 189, 248, 0.16) 0%, transparent 45%),
+        linear-gradient(180deg, #040912 0%, #071022 52%, #040912 100%);
+    }
+
+    /* Subtle architectural grid matching arthurg.my.id */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 55%, transparent 100%);
+      z-index: 0;
+    }
+
+    a, button {
+      font: inherit;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* Top bar */
+    .top-bar {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 20px 24px 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 1.125rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      min-height: 44px;
+      padding: 6px 12px;
+      border-radius: 10px;
+      background: rgba(10, 22, 51, 0.72);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .brand-link:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .top-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      background: rgba(10, 22, 51, 0.8);
+      border: 1px solid var(--border);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8125rem;
+      color: var(--accent);
+    }
+
+    .motion-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      min-width: 44px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      background: rgba(10, 22, 51, 0.85);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .motion-btn:hover {
+      background: var(--surface-elevated);
+      border-color: var(--accent);
+    }
+
+    /* Fullscreen Hero Stage */
+    .stage {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 16px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 18px;
+    }
+
+    .speech-bubble {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(16, 32, 72, 0.92);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.5);
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .speech-bubble-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--warn);
+    }
+
+    /* Giant Living 404 / Error Characters */
+    .living-code-wrap {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(8px, 2.2vw, 28px);
+      padding: 8px 0;
+      user-select: none;
+    }
+
+    .char-card {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 4px;
+      min-width: 44px;
+      min-height: 44px;
+      transform-origin: bottom center;
+    }
+
+    .char-card:nth-child(1) {
+      animation: charHop1 3.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+
+    .char-card:nth-child(2) {
+      animation: charHop2 2.8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite 0.35s;
+    }
+
+    .char-card:nth-child(3) {
+      animation: charHop3 3.4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite 0.7s;
+    }
+
+    .char-card.is-jumping {
+      animation: charSuperJump 0.65s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+
+    .char-digit {
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      font-size: clamp(6.2rem, 23vw, 15.5rem);
+      line-height: 0.88;
+      letter-spacing: -0.05em;
+      background: linear-gradient(180deg, #ffffff 0%, #bae6fd 38%, #38bdf8 75%, #2563eb 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 18px 36px rgba(37, 99, 235, 0.35));
+      position: relative;
+      display: block;
+    }
+
+    /* Eyes mounted on each jumping character */
+    .eyes-pair {
+      position: absolute;
+      top: 34%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 1.2vw, 14px);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .eye-socket {
+      width: clamp(24px, 4.2vw, 48px);
+      height: clamp(30px, 5.2vw, 58px);
+      border-radius: 999px;
+      background: #ffffff;
+      border: 3px solid #040912;
+      box-shadow:
+        0 6px 16px rgba(2, 6, 23, 0.65),
+        inset 0 -4px 6px rgba(148, 163, 184, 0.35);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: naturalBlink 4.8s infinite;
+    }
+
+    .char-card:nth-child(2) .eye-socket {
+      animation-delay: 1.4s;
+    }
+
+    .char-card:nth-child(3) .eye-socket {
+      animation-delay: 2.7s;
+    }
+
+    .eye-pupil {
+      width: clamp(11px, 2vw, 22px);
+      height: clamp(13px, 2.3vw, 25px);
+      border-radius: 999px;
+      background: #040912;
+      position: relative;
+      transition: transform 0.06s linear;
+    }
+
+    .eye-pupil::after {
+      content: "";
+      position: absolute;
+      top: 20%;
+      left: 22%;
+      width: 32%;
+      height: 32%;
+      border-radius: 999px;
+      background: #ffffff;
+    }
+
+    .eye-pupil::before {
+      content: "";
+      position: absolute;
+      bottom: 18%;
+      right: 20%;
+      width: 18%;
+      height: 18%;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    /* Little feet / shadow under each digit */
+    .char-shadow {
+      width: clamp(48px, 11vw, 130px);
+      height: 12px;
+      border-radius: 999px;
+      background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.35) 0%, rgba(4, 9, 18, 0) 75%);
+      margin-top: 6px;
+      animation: shadowPulse 3.2s ease-in-out infinite;
+    }
+
+    /* Headline & Diagnostic Panel */
+    .error-headline {
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.6rem, 3.8vw, 2.65rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      max-width: 28ch;
+    }
+
+    .error-description {
+      font-size: clamp(0.95rem, 1.6vw, 1.125rem);
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    /* Diagnostic telemetry strip for wrong path / port / subdomain / 401 */
+    .diag-card {
+      width: 100%;
+      max-width: 720px;
+      background: rgba(10, 22, 51, 0.82);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      text-align: left;
+      box-shadow: 0 18px 40px rgba(2, 6, 23, 0.45);
+    }
+
+    .diag-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .diag-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    .diag-val {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Action CTA Row */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 12px 26px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-strong) 0%, #1d4ed8 100%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 1px solid rgba(147, 197, 253, 0.35);
+      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.42);
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 38px rgba(56, 189, 248, 0.45);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 50px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: rgba(10, 22, 51, 0.88);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-elevated);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* Footer */
+    .bottom-bar {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+
+    @keyframes charHop1 {
+      0%, 100% { transform: translateY(0) scale(1, 1); }
+      35% { transform: translateY(-18px) scale(0.97, 1.04); }
+      55% { transform: translateY(0) scale(1.04, 0.96); }
+      70% { transform: translateY(-6px) scale(0.99, 1.01); }
+    }
+
+    @keyframes charHop2 {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      40% { transform: translateY(-24px) rotate(-3deg) scale(0.96, 1.05); }
+      65% { transform: translateY(0) rotate(2deg) scale(1.05, 0.95); }
+    }
+
+    @keyframes charHop3 {
+      0%, 100% { transform: translateY(0) scale(1, 1); }
+      45% { transform: translateY(-16px) scale(0.97, 1.03); }
+      68% { transform: translateY(0) scale(1.03, 0.97); }
+    }
+
+    @keyframes charSuperJump {
+      0% { transform: translateY(0) scale(1.08, 0.9); }
+      40% { transform: translateY(-42px) rotate(6deg) scale(0.94, 1.08); }
+      75% { transform: translateY(0) scale(1.06, 0.94); }
+      100% { transform: translateY(0) scale(1, 1); }
+    }
+
+    @keyframes naturalBlink {
+      0%, 44%, 48%, 92%, 96%, 100% { transform: scaleY(1); }
+      46%, 94% { transform: scaleY(0.08); }
+    }
+
+    @keyframes shadowPulse {
+      0%, 100% { transform: scaleX(1); opacity: 0.85; }
+      40% { transform: scaleX(0.72); opacity: 0.45; }
+    }
+
+    /* Respect reduced motion and manual pause */
+    html[data-motion="paused"] *,
+    html[data-motion="paused"] *::before,
+    html[data-motion="paused"] *::after {
+      animation-play-state: paused !important;
+      transition: none !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .top-bar {
+        padding: 14px 16px 0;
+      }
+      .stage {
+        padding: 12px 16px 20px;
+        gap: 14px;
+      }
+      .diag-card {
+        grid-template-columns: 1fr 1fr;
+        padding: 12px 14px;
+      }
+      .cta-row {
+        width: 100%;
+      }
+      .btn-main, .btn-secondary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <a href="https://arthurg.my.id" class="brand-link" aria-label="Back to arthurg.my.id homepage">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span>ARTHURG.MY.ID</span>
+    </a>
+
+    <div class="top-controls">
+      <div id="status-chip" class="status-chip" role="status">
+        <span>HTTP</span>
+        <strong id="chip-code">404</strong>
+      </div>
+      <button type="button" id="motion-toggle" class="motion-btn" onclick="toggleErrorMotion()" aria-pressed="false">
+        <span id="motion-label">Pause Motion</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="stage" id="main-content">
+    <div class="speech-bubble" id="mascot-bubble" role="status" aria-live="polite">
+      <span class="speech-bubble-indicator" aria-hidden="true"></span>
+      <span id="mascot-speech-text">Whoops! Our eyes scanned the entire server, but this route doesn't exist.</span>
+    </div>
+
+    <div class="living-code-wrap" aria-label="HTTP status code characters">
+      <button type="button" class="char-card" onclick="bounceDigit(this, 0)" aria-label="First status digit, click to jump">
+        <span class="char-digit" id="digit-0">4</span>
+        <span class="eyes-pair" aria-hidden="true">
+          <span class="eye-socket"><span class="eye-pupil"></span></span>
+          <span class="eye-socket"><span class="eye-pupil"></span></span>
+        </span>
+        <span class="char-shadow" aria-hidden="true"></span>
+      </button>
+
+      <button type="button" class="char-card" onclick="bounceDigit(this, 1)" aria-label="Second status digit, click to jump">
+        <span class="char-digit" id="digit-1">0</span>
+        <span class="eyes-pair" aria-hidden="true">
+          <span class="eye-socket"><span class="eye-pupil"></span></span>
+          <span class="eye-socket"><span class="eye-pupil"></span></span>
+        </span>
+        <span class="char-shadow" aria-hidden="true"></span>
+      </button>
+
+      <button type="button" class="char-card" onclick="bounceDigit(this, 2)" aria-label="Third status digit, click to jump">
+        <span class="char-digit" id="digit-2">4</span>
+        <span class="eyes-pair" aria-hidden="true">
+          <span class="eye-socket"><span class="eye-pupil"></span></span>
+          <span class="eye-socket"><span class="eye-pupil"></span></span>
+        </span>
+        <span class="char-shadow" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <h1 class="error-headline" id="error-title">404 Not Found: Page Could Not Be Found</h1>
+    <p class="error-description" id="error-desc">
+      The directory, subdomain, or port you requested is not available on <strong>arthurg.my.id</strong>. Click the characters above or use the buttons below to return to the main portal.
+    </p>
+
+    <section class="diag-card" aria-label="Route diagnostics">
+      <div class="diag-item">
+        <span class="diag-label">Detected Status</span>
+        <span class="diag-val" id="diag-reason">Invalid Directory / Path</span>
+      </div>
+      <div class="diag-item">
+        <span class="diag-label">Domain / Host</span>
+        <span class="diag-val" id="diag-host">arthurg.my.id</span>
+      </div>
+      <div class="diag-item">
+        <span class="diag-label">Requested Path</span>
+        <span class="diag-val" id="diag-path">/</span>
+      </div>
+      <div class="diag-item">
+        <span class="diag-label">Port &amp; Protocol</span>
+        <span class="diag-val" id="diag-port">443 (HTTPS)</span>
+      </div>
+    </section>
+
+    <div class="cta-row">
+      <a href="https://arthurg.my.id" class="btn-main" id="btn-home">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 10.5L12 3l9 7.5"></path>
+          <path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"></path>
+        </svg>
+        <span>Back to Main Website (arthurg.my.id)</span>
+      </a>
+      <a href="https://arthurg.my.id/public" class="btn-secondary">
+        <span>Open Public Tools</span>
+      </a>
+      <button type="button" class="btn-secondary" onclick="goBackOrHome()">
+        <span>Previous Page</span>
+      </button>
+    </div>
+  </main>
+
+  <footer class="bottom-bar">
+    <span>Arthur Official Ecosystem | Interactive Route Guard</span>
+    <span>Click the animated digits above to interact</span>
+  </footer>
+
+  <script>
+    (function () {
+      const SERVER_PRESET = window.__ARTHUR_ERROR_DATA__ || null;
+      const pupils = Array.from(document.querySelectorAll('.eye-pupil'));
+      const speechText = document.getElementById('mascot-speech-text');
+      const speechLines = [
+        'Whoops! Our eyes scanned the entire server, but this route doesn\'t exist.',
+        'Looks like a wrong turn! Double-check the directory path, subdomain, or port.',
+        'Nothing here but empty space. Let\'s head back to arthurg.my.id!',
+        'Still bouncing around waiting for you to hit the Back to Main Website button!'
+      ];
+      let speechIdx = 0;
+
+      function isMotionPaused() {
+        return document.documentElement.getAttribute('data-motion') === 'paused' ||
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
+
+      window.toggleErrorMotion = function () {
+        const html = document.documentElement;
+        const next = html.getAttribute('data-motion') === 'paused' ? 'on' : 'paused';
+        html.setAttribute('data-motion', next);
+        const btn = document.getElementById('motion-toggle');
+        const label = document.getElementById('motion-label');
+        if (btn) btn.setAttribute('aria-pressed', next === 'paused' ? 'true' : 'false');
+        if (label) label.textContent = next === 'paused' ? 'Resume Motion' : 'Pause Motion';
+        if (next === 'paused') {
+          pupils.forEach(p => { p.style.transform = 'translate(0px, 0px)'; });
+        }
+      };
+
+      window.bounceDigit = function (el, idx) {
+        if (!isMotionPaused()) {
+          el.classList.remove('is-jumping');
+          void el.offsetWidth;
+          el.classList.add('is-jumping');
+          setTimeout(() => el.classList.remove('is-jumping'), 680);
+        }
+        speechIdx = (speechIdx + 1) % speechLines.length;
+        if (speechText) {
+          speechText.textContent = speechLines[speechIdx];
+        }
+      };
+
+      window.goBackOrHome = function () {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = 'https://arthurg.my.id';
+        }
+      };
+
+      function updateEyes(clientX, clientY) {
+        if (isMotionPaused()) return;
+        pupils.forEach(pupil => {
+          const socket = pupil.parentElement;
+          if (!socket) return;
+          const rect = socket.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const dx = clientX - centerX;
+          const dy = clientY - centerY;
+          const angle = Math.atan2(dy, dx);
+          const maxDistX = rect.width * 0.24;
+          const maxDistY = rect.height * 0.24;
+          const dist = Math.min(1, Math.hypot(dx, dy) / 220);
+          const moveX = Math.cos(angle) * maxDistX * dist;
+          const moveY = Math.sin(angle) * maxDistY * dist;
+          pupil.style.transform = 'translate(' + moveX.toFixed(1) + 'px, ' + moveY.toFixed(1) + 'px)';
+        });
+      }
+
+      window.addEventListener('pointermove', function (e) {
+        updateEyes(e.clientX, e.clientY);
+      }, { passive: true });
+
+      window.addEventListener('touchmove', function (e) {
+        if (e.touches && e.touches[0]) {
+          updateEyes(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      // Configure Error Code & Diagnostics dynamically
+      const params = new URLSearchParams(window.location.search);
+      const host = window.location.hostname || 'arthurg.my.id';
+      const pathname = window.location.pathname || '/';
+      const port = window.location.port || (window.location.protocol === 'https:' ? '443' : '80');
+      const proto = window.location.protocol.replace(':', '').toUpperCase() || 'HTTPS';
+
+      let code = String(
+        (SERVER_PRESET && SERVER_PRESET.code) ||
+        params.get('code') ||
+        '404'
+      ).replace(/[^0-9]/g, '').slice(0, 3) || '404';
+      if (code.length < 3) code = code.padEnd(3, '0');
+
+      const knownHosts = ['arthurg.my.id', 'www.arthurg.my.id', 'wa.arthurg.my.id', 'vault.arthurg.my.id', 'localhost', '127.0.0.1'];
+      const isWrongSubdomain = !knownHosts.includes(host.toLowerCase());
+      const isNonStandardPort = port !== '80' && port !== '443' && port !== '3000';
+
+      let title = (SERVER_PRESET && SERVER_PRESET.title) || '';
+      let desc = (SERVER_PRESET && SERVER_PRESET.message) || '';
+      let reason = (SERVER_PRESET && SERVER_PRESET.reason) || 'Directory / Path Not Found';
+
+      if (code === '401' || code === '403') {
+        title = title || (code + ' Unauthorized: Authorization Required');
+        desc = desc || 'The page or endpoint you requested is protected by Owner PIN security. Please return to the main website or sign in through the official portal.';
+        reason = 'Authorization / PIN Required (' + code + ')';
+        if (speechText) speechText.textContent = 'This route is locked by Owner PIN! Make sure you have valid access.';
+      } else if (code === '410') {
+        title = title || '410 Gone: Link Has Expired';
+        desc = desc || 'The shortlink or shared file you opened has passed its expiration time or reached its maximum download limit.';
+        reason = 'Expired Link (410)';
+      } else if (code === '502' || code === '503' || code === '504') {
+        title = title || (code + ' Service Guard: Service Synchronizing');
+        desc = desc || 'The backend port or service on this route is currently unreachable. Please return to the main portal at arthurg.my.id.';
+        reason = 'Service / Port Offline (' + code + ')';
+      } else if (isWrongSubdomain) {
+        title = 'Unregistered Subdomain on arthurg.my.id';
+        desc = 'Subdomain "' + host + '" does not point to any public service. Please use the primary domain arthurg.my.id.';
+        reason = 'Unknown Subdomain (' + host + ')';
+      } else if (isNonStandardPort) {
+        title = 'Unsupported Connection Port (' + port + ')';
+        desc = 'Port ' + port + ' is not open for public web access. Please connect over standard HTTPS on arthurg.my.id.';
+        reason = 'Invalid Port (' + port + ')';
+      } else {
+        title = title || '404 Not Found: Page Could Not Be Found';
+        desc = desc || 'The directory or route "' + pathname + '" was not found on arthurg.my.id. Verify the URL or return to the main homepage.';
+      }
+
+      document.getElementById('digit-0').textContent = code[0] || '4';
+      document.getElementById('digit-1').textContent = code[1] || '0';
+      document.getElementById('digit-2').textContent = code[2] || '4';
+      document.getElementById('chip-code').textContent = code;
+      document.getElementById('error-title').textContent = title;
+      document.getElementById('error-desc').textContent = desc;
+      document.getElementById('diag-reason').textContent = reason;
+      document.getElementById('diag-host').textContent = host;
+      document.getElementById('diag-path').textContent = pathname;
+      document.getElementById('diag-port').textContent = port + ' (' + proto + ')';
+      document.getElementById('page-doc-title').textContent = title + ' | arthurg.my.id';
+    })();
+  </script>
+</body>
+</html>
