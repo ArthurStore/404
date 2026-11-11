@@ -1,0 +1,30 @@
+name: Daily Green Contribution
+
+on:
+  schedule:
+    # Berjalan otomatis setiap hari jam 00:00 UTC (07:00 WIB / 08:00 WITA)
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  daily-ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Git Identity
+        run: |
+          git config --global user.name "ArthurStore"
+          git config --global user.email "103574246+ArthurStore@users.noreply.github.com"
+
+      - name: Update Activity Log
+        run: |
+          TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          echo "| $TIMESTAMP | Cloud Ping | Operational |" >> ACTIVITY.md
+          git add ACTIVITY.md
+          git commit -m "chore(cloud): daily automated contribution ping [$TIMESTAMP]" || echo "No changes"
+          git push
